@@ -163,14 +163,8 @@ require_once("class/movie.php");
 			echo "</tr>";
 		}
 		echo "<table>";
-
-		$sql = "SELECT * FROM movie WHERE judul like ?";
-		$stmt = $mysqli->prepare($sql);
-		$modified_keyword = "%" . $keyword . "%";
-		$stmt->bind_param('s', $modified_keyword);
-		$stmt->execute();
-		$res = $stmt->get_result();
-		$total_data = $res->num_rows;
+		
+		$total_data = $movie->getJumlahData($keyword);
 
 		include 'nomor_halaman.php';
 		echo generateNomorHalaman($total_data, $offset, $limit, $keyword);
