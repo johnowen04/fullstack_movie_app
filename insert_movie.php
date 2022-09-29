@@ -45,7 +45,6 @@
 		Poster:
 		<div id='files'>
 			<div>
-				<img src='img/1.jpg' class='gambar'>
 				<input type='file' name='poster[]' accept='.jpg,.png'><input type='button' class='btnHapusGambar' value='Hapus'>
 			</div>
 		</div>
