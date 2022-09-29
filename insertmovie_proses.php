@@ -1,4 +1,7 @@
 <?php 
+
+require_once("class/movie.php");
+
 $mysqli = new mysqli("localhost", "root", "", "fullstack_db");
 
 if ($mysqli->connect_errno) {
@@ -6,20 +9,16 @@ if ($mysqli->connect_errno) {
 }
 
 if (isset($_POST['submit'])) {
-	$judul = $_POST['judul'];
-	$rilis = $_POST['rilis'];
-	$serial = $_POST['serial'];
-	$skor = $_POST['skor'];
-	$sinopsis = $_POST['sinopsis'];
+	$arr_movie = array();
+	$arr_movie["judul"] = $_POST['judul'];
+	$arr_movie["rilis"] = $_POST['rilis'];
+	$arr_movie["serial"] = $_POST['serial'];
+	$arr_movie["skor"] = $_POST['skor'];
+	$arr_movie["sinopsis"] = $_POST['sinopsis'];
 	$genres = $_POST['genre'];
 
-	$sql = "INSERT INTO movie(judul, rilis, skor, sinopsis, serial) VALUES(?,?,?,?,?)";
-	$stmt = $mysqli->prepare($sql);
-	$stmt->bind_param('ssdsi', $judul, $rilis, $skor, $sinopsis, $serial);
-
-	$stmt->execute();
-
-	$idmovie = $stmt ->insert_id;
+	$movie = new movie();
+	$idmovie = $movie->insertMovie($arr_movie);
 
 	if ($idmovie) {
 		// Input genre
